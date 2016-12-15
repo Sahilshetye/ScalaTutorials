@@ -5,9 +5,9 @@ x.numer
 x.deno
 val y= new Rational(5,7)
 val z= new Rational(3,2)
-x.add(y).mul(z)
-x.sub(y).sub(z)
-x.less(y)
+x + y * z
+x-y - z
+x < y
 y.max(z)
 
 class Rational(x:Int,y:Int)
@@ -26,20 +26,20 @@ require(y!=0,"Denominator must be non zero")
   def  numer= x
   def deno= y
 
- def less(that:Rational)=numer*that.deno < that.numer* deno
+ def <(that:Rational)=numer*that.deno < that.numer* deno
 
- def max(that:Rational)= if(this.less(that)) that else this
+ def max(that:Rational)= if(this < that ) that else this
 
-  def add(that:Rational)=
+  def +(that:Rational)=
     new Rational(numer*that.deno+that.numer* deno, deno*that.deno)
 
-  def mul(that:Rational)=
+  def *(that:Rational)=
     new Rational(that.numer*numer,that.deno*deno)
 
-  def neg=
+  def unary_- :Rational =
     new Rational(-numer,deno)
 
-  def sub(that:Rational)= add(that.neg)
+  def -(that:Rational)= this + -that
 
 
   override def toString= {
